@@ -3,11 +3,21 @@ title: Site
 tabs:
   links:
     label: links
-    sections:
+    fields:
       links:
-        type: pages 
-        headline: Links 
-        template: link
+        label: Links
+        type: structure 
+        fields:
+          what: 
+            type: text
+          where:
+            type: text 
+          url:
+            type: url
+          image: 
+            type: files
+            multiple: false
+            help: if an image is added the icon is ignored 
   info:
     label: info
     columns:  
@@ -15,12 +25,15 @@ tabs:
         fields:
           name:
             type: text
-            width: 1/2
             placeholder: So Me One
-          handle:
-            type: text
-            width: 1/2
-            placeholder: @someone
+          handles:
+            type: structure
+            fields:
+              handle:
+                type: text
+                placeholder: @someone 
+              url: 
+                type: url
           bio:
             type: writer
       - width: 1/4

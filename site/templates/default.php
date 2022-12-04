@@ -4,24 +4,28 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title><?= $site->title() ?></title>
-	    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	    <script src="https://cdn.tailwindcss.com"></script>
 	</head>
 	<body class="min-h-screen bg-gray-100">
 	    
 	    <div id="header" class="max-w-7xl mx-auto">
 	        
 	        <div>
-	            <figure class="p-6">
+	            <figure class="py-12 px-6">
 	            	<?php if ($site->avatar()->isNotEmpty()) : ?>
-	                	<img id="portrait" class="w-32 h-32 rounded-full mx-auto" src="<?= $site->avatar()->toFile()->url() ?>" alt="profile picture" width="400" height="400">
+	                	<img id="portrait" class="w-24 h-24 md:w-32 md:h-32 rounded-full mx-auto" src="<?= $site->avatar()->toFile()->url() ?>" alt="profile picture" width="400" height="400">
 	                <?php endif ?>
 	                <div class="pt-6 text-center space-y-4">
 	                  <figcaption class="font-medium">
-	                    <div id="name" class="text-cyan-900 text-xl">
+	                    <div id="name" class="text-gray-700 text-xl">
 	                      <?= $site->name()->isNotEmpty() ? $site->name()->html() : '' ?>
 	                    </div>
 	                    <div id="handle" class="text-gray-500 font-light">
-	                      <?= $site->handle()->isNotEmpty() ? $site->handle()->html() : '' ?>
+	                    	<?php if ($site->handles()->isNotEmpty()): ?>
+		                    	<?php foreach ($site->handles()->toStructure() as $h): ?>
+		                      		<a href="<?= $h->url() ?>"><?= $h->handle()->html() ?></a>
+	    	                	<?php endforeach ?>
+	        				<?php endif ?>
 	                    </div>
 	                  </figcaption>
 	                  <blockquote>
@@ -35,56 +39,24 @@
 	        
 	    </div>
 
-	    <div id="cards" class="max-w-xs mx-auto">
+	    <div id="cards" class="p-6 max-w-xl mx-auto">
 	        
-	        <div class="pt-6 text-center space-y-4">
-	            <a href="https://cpintoval.github.io/" target="_blank" class="flex items-start rounded-lg border border-gray-400 bg-white px-5 py-4 text-lg leading-6 font-medium shadow-md hover:shadow-xl transition ease-in-out duration-150">
-	                <p class="mr-3 h-6 w-6">👨🏽‍💻</p>
-	                Website
-	                <div class="ml-auto mt-0.5 pl-4">
-	                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-	                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-	                    </svg>
-	                </div>
-	            </a>
-	        </div>
-	        
-	        <div class="pt-6 text-center space-y-4">
-	            <a href="https://twitter.com/cpintoval" target="_blank" class="flex items-start rounded-lg border border-gray-400 bg-white px-5 py-4 text-lg leading-6 font-medium shadow-md hover:shadow-xl transition ease-in-out duration-150">
-	                <p class="mr-3 h-6 w-6">💬</p>
-	                Twitter
-	                <div class="ml-auto mt-0.5 pl-4">
-	                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-	                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-	                    </svg>
-	                </div>
-	            </a>
-	        </div>
-	        
-	        <div class="pt-6 text-center space-y-4">
-	            <a href="https://www.linkedin.com/in/cpintoval/" target="_blank" class="flex items-start rounded-lg border border-gray-400 bg-white px-5 py-4 text-lg leading-6 font-medium shadow-md hover:shadow-xl transition ease-in-out duration-150">
-	                <p class="mr-3 h-6 w-6">💼</p>
-	                LinkedIn
-	                <div class="ml-auto mt-0.5 pl-4">
-	                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-	                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-	                    </svg>
-	                </div>
-	            </a>
-	        </div>
-	        
-	        <div class="pt-6 text-center space-y-4">
-	            <a href="https://github.com/cpintoval" target="_blank" class="flex items-start rounded-lg border border-gray-400 bg-white px-5 py-4 text-lg leading-6 font-medium shadow-md hover:shadow-xl transition ease-in-out duration-150">
-	                <p class="mr-3 h-6 w-6">🛠</p>
-	                GitHub
-	                <div class="ml-auto mt-0.5 pl-4">
-	                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-	                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-	                    </svg>
-	                </div>
-	            </a>
-	        </div>
-	        
+	        <?php if ($site->links()->isNotEmpty()): ?>
+		        <?php foreach ($site->links()->toStructure() as $l):?>
+			        <div class="pt-6 text-center space-y-4">
+			            <a href="<?= $l->url()->isNotEmpty() ? $l->url() : '' ?>" target="_blank" class="flex items-center justify-between rounded-lg border bg-white px-2 py-2 text-sm md:text-base md:text-md leading-6 font-medium shadow-md hover:shadow-xl transition ease-in-out duration-150">
+			                <?php if ($l->image()->isNotEmpty()): ?>
+			                	<img class="w-12 h-12 rounded" src="<?= $l->image()->toFile()->url() ?>">
+			            	<?php endif ?>	
+			                <p class="text-gray-600 p-2">
+			                	<?= $l->what()->html() ?>
+			                	<?= $l->where()->isNotEmpty() ? ' @ ' . $l->where()->html() : '' ?>		
+		                	</p>
+			            </a>
+			        </div>
+			    <?php endforeach ?>
+			<?php endif ?>
+
 	    </div>
 	    
 
