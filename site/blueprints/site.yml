@@ -1,5 +1,36 @@
 title: Site
 
-sections:
-  pages:
-    type: pages
+tabs:
+  links:
+    label: links
+    sections:
+      links:
+        type: pages 
+        headline: Links 
+        template: link
+  info:
+    label: info
+    columns:  
+      - width: 3/4
+        fields:
+          name:
+            type: text
+            width: 1/2
+            placeholder: So Me One
+          handle:
+            type: text
+            width: 1/2
+            placeholder: @someone
+          bio:
+            type: writer
+      - width: 1/4
+        fields:
+          avatar:
+            label: Avatar
+            type: files
+            multiple: false 
+            size: medium
+            layout: cards
+            translate: false      
+  meta:
+    label: meta
